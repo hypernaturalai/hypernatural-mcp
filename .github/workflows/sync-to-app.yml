@@ -1,0 +1,41 @@
+name: Sync skills to app repo
+
+on:
+  push:
+    branches: [main]
+    paths: ["skills/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: hypernaturalai/hypernatural
+          token: ${{ secrets.APP_REPO_TOKEN }}
+          path: app
+
+      - name: Copy skill files into the app
+        run: |
+          cp skills/hypernatural-video-creation/SKILL.md \
+            app/hypernatural/views/mcp/hypernatural_video_creation_skill.md
+
+      - name: Open sync PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.APP_REPO_TOKEN }}
+          path: app
+          branch: agent-skills-sync
+          title: "Sync agent skills from hypernaturalai/agent-skills"
+          commit-message: "Sync agent skills from hypernaturalai/agent-skills"
+          body: |
+            Automated sync from [hypernaturalai/agent-skills](https://github.com/hypernaturalai/agent-skills) (source of truth for `skills/`).
+
+            Do not edit the synced `*_skill.md` files directly in this repo — change them in agent-skills instead.
+
+            Triggered by ${{ github.sha }}.
