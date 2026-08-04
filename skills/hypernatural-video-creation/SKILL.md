@@ -1,44 +1,33 @@
 ---
 name: hypernatural-video-creation
-description: Create and edit AI-generated videos with Hypernatural from any MCP client or via the public REST API.
+description: Use when a user wants to create or edit a video from a prompt, script, product, or images using Hypernatural — or asks to connect to the Hypernatural MCP server.
 ---
 
 # Creating videos with Hypernatural
 
-Hypernatural (https://hypernatural.ai) turns prompts, scripts, and reference material into fully edited videos with scenes, voiceover, music, and captions.
+Hypernatural (https://hypernatural.ai) turns prompts, scripts, and reference media into edited videos. Drive it through the MCP server at `https://api.hypernatural.ai/mcp` (streamable HTTP, OAuth handled by your client — add the URL and sign in). The server's tool descriptions document every argument; this skill covers the workflow and UX rules that make results good.
 
-## MCP server (recommended)
+## Core workflow
 
-Streamable HTTP endpoint: `https://api.hypernatural.ai/mcp`
+1. **Draft a shot list before creating anything.** Each `Shot 1: …` entry becomes exactly one shot. If the user gave shot-level detail, relabel their own wording — no approval needed. If you invented or materially expanded anything (turned prose into shots, added shots, style, taglines), **show the drafted shot list and get the user's approval first** — no `create_composition`, `create_character`, or `create_reference_object` until they approve. An explicit waiver ("just make it, I trust you") counts as approval — still show the list, but don't block on a reply. Give every shot a concrete Visual (subjects, exact `@Name`s) and Animation (motion, camera); quoted on-screen speech goes first in Animation.
+2. **Set up references before the composition.** Upload the user's images, route each by what it *is*: scene, background, mood, or style → `create_asset` (pass as `static_image_references`); a product or logo that must look identical wherever it appears → `create_reference_object`; a person who appears on screen → `create_character`. Poll each creator's job with `get_job` to `complete` before using the new `@Name` — it does not exist in the same turn.
+3. **One `create_composition` call**, then poll `get_composition` (not `get_job`) and do what `next_action` says — it is computed, not advisory. `wait` means wait `retry_after_seconds` and poll again — no message to Hypernatural and no per-poll updates to the user (answering their direct "is it done?" is fine). `answer_question` means ask the user and forward *their* answer — you may offer a labeled recommendation, but never answer for them — and send nothing else until it's answered, since an unrelated message cancels the question. Relay `top_up_credits` / `open_in_app` / `report_failure` guidance and stop.
+4. **Hand off with the composition `url`** (never a bare id). Rendering and export happen in the Hypernatural app, not over MCP.
 
-Authentication is OAuth 2.0 with PKCE and dynamic client registration. Discovery metadata lives at `https://api.hypernatural.ai/.well-known/oauth-protected-resource/mcp`; most MCP clients handle the sign-in flow automatically when you add the server URL.
+## UX rules
 
-Quick registration:
+- Editing is plain language to `send_chat_message`: exact `@Name`s for entities, shots by position or content ("shot 2", "the cafe shot").
+- Quote the durations `get_composition` reports, not the ones you asked for — narration refits timing. Ask for pacing in words ("quick cuts") unless the user wants exact timing.
+- A `complete` job can still contain per-file failures — check `error_message` and `result.errors`; files listed there are absent from `result.assets`.
+- Close turns honestly: generation is *kicked off*, not *ready*, until polling says so.
+- Reuse the team library (`list_assets`, `list_characters`, `list_reference_objects`) before creating duplicates.
 
-- Claude Code: `claude mcp add --transport http hypernatural https://api.hypernatural.ai/mcp`
-- Codex: `codex mcp add hypernatural --url https://api.hypernatural.ai/mcp`
-- Cursor / Claude / ChatGPT: add `https://api.hypernatural.ai/mcp` as a custom connector or MCP server URL.
+## Common mistakes
 
-## Typical workflow
-
-1. Optionally upload reference media (`get_image_upload_urls` then `create_asset`) and create reusable subjects (`create_reference_object` for products/logos, `create_character` for people).
-2. `create_composition` with a prompt describing the video; seed it with reference objects or characters for visual consistency.
-3. Track generation with `list_jobs` / `get_job` until the composition is ready.
-4. Inspect the result with `get_composition`; request edits in natural language with `send_chat_message` (for example "make the intro shorter" or "swap the background music").
-5. Direct the user to open the composition in the Hypernatural editor to fine-tune and export the final video.
-
-## Tools
-
-- `create_composition` — start a new video from a prompt
-- `get_composition` / `list_compositions` — inspect existing videos
-- `send_chat_message` — natural-language edits to a composition
-- `get_image_upload_urls` / `create_asset` / `list_assets` — bring your own media
-- `create_reference_object` / `list_reference_objects` — reusable product/object references
-- `create_character` / `list_characters` — reusable people/character references
-- `list_jobs` / `get_job` — track asynchronous generation work
-
-## Public REST API
-
-- OpenAPI spec: `https://api.hypernatural.ai/api/v1/schema.json`
-- Documentation: `https://api.hypernatural.ai/api/v1/docs/`
-- Authentication: Bearer API tokens, created in account settings at `https://app.hypernatural.ai`.
+| Mistake | Instead |
+|---|---|
+| `create_composition` straight from a vague ask | Draft the shot list, get approval |
+| Using an `@Name` in the same turn as its `create_*` | Poll the job to `complete` first |
+| Answering a `next_action` question yourself | Forward the user's own answer |
+| Messaging while `next_action` is `wait` | Wait `retry_after_seconds`, poll again |
+| Uploading a product photo as a plain asset | Products/logos are reference objects; people are characters |

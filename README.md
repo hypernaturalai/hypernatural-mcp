@@ -8,10 +8,8 @@ Skills are discoverable at [`https://hypernatural.ai/.well-known/agent-skills/in
 
 | Skill | Description |
 |---|---|
-| [`hypernatural-video-creation`](skills/hypernatural-video-creation/SKILL.md) | Create and edit AI-generated videos with Hypernatural from any MCP client or via the public REST API. |
+| [`hypernatural-video-creation`](skills/hypernatural-video-creation/SKILL.md) | Create or edit a video from a prompt, script, product, or images using the Hypernatural MCP server. |
 
 ## Layout
 
 Each skill lives at `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
-
-This repo is the source of truth. Pushes to `main` open a sync pull request against the Hypernatural app repo via CI; the served copies (and the digests in the discovery index) update when that PR merges and deploys.
