@@ -2,6 +2,8 @@
 
 Agent skills for [Hypernatural](https://hypernatural.ai) — AI video creation from any MCP client or the public REST API.
 
+This repository is also an installable OpenAI plugin that bundles the Hypernatural MCP connection with these skills.
+
 ## Skills
 
 | Skill | Description |
@@ -10,6 +12,6 @@ Agent skills for [Hypernatural](https://hypernatural.ai) — AI video creation f
 
 ## Layout
 
-Each skill lives at `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
+Each skill lives at `skills/<name>/SKILL.md` with `name` and `description` frontmatter. OpenAI-specific presentation and MCP dependency metadata lives beside it in `agents/openai.yaml`.
 
 This repo is the source of truth.

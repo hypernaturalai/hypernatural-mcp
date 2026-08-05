@@ -1,0 +1,34 @@
+{
+  "name": "hypernatural-skills",
+  "version": "0.1.0",
+  "description": "Create and edit AI-generated videos with Hypernatural",
+  "author": {
+    "name": "Hypernatural"
+  },
+  "homepage": "https://hypernatural.ai",
+  "repository": "https://github.com/hypernaturalai/hypernatural-skills",
+  "keywords": [
+    "ai-video",
+    "video-creation",
+    "video-editing"
+  ],
+  "skills": "./skills/",
+  "apps": "./.app.json",
+  "interface": {
+    "displayName": "Hypernatural",
+    "shortDescription": "Create and edit AI videos",
+    "longDescription": "Create AI-generated videos, revise shots, reuse characters and product references, manage image assets, and monitor generation progress with Hypernatural.",
+    "developerName": "Hypernatural",
+    "category": "Design",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://hypernatural.ai",
+    "defaultPrompt": [
+      "Create a Hypernatural video from my idea.",
+      "Edit the second shot in my latest Hypernatural video.",
+      "Show my reusable Hypernatural characters and products."
+    ]
+  }
+}
