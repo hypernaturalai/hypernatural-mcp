@@ -2,6 +2,8 @@
 
 The prompt is planner input: each `Shot N: …` entry becomes exactly one shot, and the planner preserves count, order, and intent while expanding generation detail. These rules make that expansion land. Give every shot a **Visual** (what the still frame shows) and an **Animation** (how it moves).
 
+**These rules govern shot lists you draft yourself.** When the user supplies their own shot list, preserve their wording — weaving required `@Name`s in is a binding edit, not a rewrite — and do NOT restructure their shots into the Visual/Animation format or expand them; the planner does that.
+
 ## Visual — becomes a still image
 
 - Concrete subjects, objects, and placement. No abstract or mood words (vibrant, breathtaking, symbolic) and no style/camera/format words (cinematic, teal grade, 35mm) — style is handled separately; describe things, not vibes.
