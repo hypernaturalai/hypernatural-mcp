@@ -1,5 +1,6 @@
 {
   "name": "hypernatural",
+  "description": "Hypernatural's official plugin: create and edit AI-generated videos from Claude Code.",
   "owner": {
     "name": "Hypernatural",
     "url": "https://hypernatural.ai"
