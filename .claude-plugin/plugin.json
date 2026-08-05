@@ -1,0 +1,16 @@
+{
+  "name": "hypernatural-video",
+  "version": "0.1.0",
+  "description": "Create and edit AI-generated videos with Hypernatural",
+  "author": {
+    "name": "Hypernatural",
+    "url": "https://hypernatural.ai"
+  },
+  "homepage": "https://hypernatural.ai",
+  "repository": "https://github.com/hypernaturalai/hypernatural-mcp",
+  "keywords": [
+    "ai-video",
+    "video-creation",
+    "video-editing"
+  ]
+}

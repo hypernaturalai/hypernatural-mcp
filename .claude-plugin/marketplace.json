@@ -1,0 +1,14 @@
+{
+  "name": "hypernatural",
+  "owner": {
+    "name": "Hypernatural",
+    "url": "https://hypernatural.ai"
+  },
+  "plugins": [
+    {
+      "name": "hypernatural-video",
+      "source": "./",
+      "description": "Create and edit AI-generated videos with Hypernatural: draft shot lists, reuse characters and product references, manage image assets, and track generation."
+    }
+  ]
+}
