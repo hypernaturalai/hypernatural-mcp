@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "hypernatural": {
+      "type": "http",
+      "url": "https://api.hypernatural.ai/mcp"
+    }
+  }
+}
