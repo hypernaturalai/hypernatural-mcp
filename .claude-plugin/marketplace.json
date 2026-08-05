@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "hypernatural-video",
+      "name": "hypernatural-mcp",
       "source": "./",
       "description": "Create and edit AI-generated videos with Hypernatural: draft shot lists, reuse characters and product references, manage image assets, and track generation."
     }
