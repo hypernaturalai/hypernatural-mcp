@@ -2,8 +2,6 @@
 
 Agent skills for [Hypernatural](https://hypernatural.ai) — AI video creation from any MCP client or the public REST API.
 
-Skills are discoverable at [`https://hypernatural.ai/.well-known/agent-skills/index.json`](https://hypernatural.ai/.well-known/agent-skills/index.json) (per the [Agent Skills Discovery RFC](https://github.com/cloudflare/agent-skills-discovery-rfc)).
-
 ## Skills
 
 | Skill | Description |
@@ -13,3 +11,5 @@ Skills are discoverable at [`https://hypernatural.ai/.well-known/agent-skills/in
 ## Layout
 
 Each skill lives at `skills/<name>/SKILL.md` with `name` and `description` frontmatter.
+
+This repo is the source of truth.
