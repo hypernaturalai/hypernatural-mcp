@@ -1,31 +1,31 @@
 # Writing shot lists
 
-The prompt is planner input: each `Shot N: …` entry becomes exactly one shot, and the planner preserves count, order, and intent while expanding generation detail. These rules make that expansion land. Give every shot a **Visual** (what the still frame shows) and an **Animation** (how it moves).
+Prompt feeds planner. Each `Shot N: …` entry becomes exactly one shot; planner preserves count, order, and intent while adding generation detail. Give every shot a **Visual** (still frame) and **Animation** (movement).
 
-**These rules govern shot lists you draft yourself.** When the user supplies their own shot list, preserve their wording — weaving required `@Name`s in is a binding edit, not a rewrite — and do NOT restructure their shots into the Visual/Animation format or expand them; the planner does that.
+**These rules govern shot lists you draft.** For user-supplied shot lists, preserve wording. Weave in required `@Name`s as binding edits; do NOT restructure into Visual/Animation form or expand. Planner does that.
 
 ## Visual — becomes a still image
 
-- Concrete subjects, objects, and placement. No abstract or mood words (vibrant, breathtaking, symbolic) and no style/camera/format words (cinematic, teal grade, 35mm) — style is handled separately; describe things, not vibes.
-- **Every shot must stand alone.** The image model sees one shot at a time with no memory of the others. Re-name and re-describe recurring people and props in every shot they appear in — "@Maria pours a latte", never "she pours" or "the same barista". Repetition across shots is correct.
-- Use exact `@Name`s for library entities every time they visually appear. Never invent an `@Name` that isn't in the library.
-- A logo entity is a graphic, not an object: put it on packaging, a sign, or an end-card — never standing in the scene like a product.
-- Never prescribe written text in the scene (a sign reading "OPEN", title cards, captions). Describe the prop generically instead. On-screen text over MCP is limited to auto-generated captions of the narration (shown/hidden on request via `send_chat_message`) — if the user wants specific words on screen, put them in a narration line (captions render them) or direct them to the Hypernatural app editor. "Say it on screen" means text, not spoken dialogue — don't turn it into a quoted line in the Animation.
+- Specify concrete subjects, objects, and placement. Avoid abstract or mood words (vibrant, breathtaking, symbolic) and style/camera/format words (cinematic, teal grade, 35mm). Style lives elsewhere; describe things, not vibes.
+- **Every shot must stand alone.** Image model sees one shot with no memory of others. Re-name and re-describe recurring people and props every time: "@Maria pours a latte", never "she pours" or "the same barista". Repetition is correct.
+- Use exact library `@Name`s every time entities appear. Never invent an `@Name` missing from library.
+- Treat logo as graphic, not object. Put it on packaging, sign, or end-card; never stand it in scene like product.
+- Never prescribe scene text (a sign reading "OPEN", title cards, captions). Describe prop generically. MCP on-screen text supports only auto-generated narration captions, shown or hidden through `send_chat_message`. For exact words, use narration so captions render them, or direct user to Hypernatural app editor. "Say it on screen" means text, not dialogue; do not turn it into quoted Animation speech.
 
 ## Animation — motion for the clip
 
-- One clear motion per shot, energy matched to the scene: decisive moves for action ("the camera whips in as she spins"), subtle motion for calm ("steam curls off the cup"). Don't flatten every shot into the same gentle drift, and don't crank a quiet scene to chaos.
-- **If a character speaks on screen, lead the Animation with the exact quoted line**: `"Always add salt," the chef says as he stirs.` An unquoted speech verb ("the chef explains", "she talks energetically") produces silent mouth movement — if you have no line to give, use a silent action instead (gestures, nods, raises a glass).
-- Speed and time effects (slow-motion, time-lapse, freeze-frame) live in the Animation, never in the Visual — a still can't show the passage of time.
+- Give each shot one clear motion with matching energy: decisive for action ("the camera whips in as she spins"), subtle for calm ("steam curls off the cup"). Avoid identical gentle drift and chaotic quiet scenes.
+- **For on-screen speech, lead Animation with exact quoted line**: `"Always add salt," the chef says as he stirs.` Unquoted speech verbs ("the chef explains", "she talks energetically") produce silent mouth movement. Without a line, use silent action instead (gestures, nods, raises a glass).
+- Put speed and time effects (slow-motion, time-lapse, freeze-frame) in Animation, never Visual; still images cannot show elapsed time.
 
 ## Structure
 
-- Interleave voiceover as quoted narration lines between shots when the video needs it. Never repeat on-screen dialogue as voiceover.
-- Ask for pacing in words ("quick cuts", "let it linger"), not per-shot seconds — durations are refit around narration. Quote the durations `get_composition` reports afterward, not the ones requested.
+- Interleave quoted narration between shots when needed. Never repeat on-screen dialogue as voiceover.
+- Ask for pacing words ("quick cuts", "let it linger"), not per-shot seconds. Narration refits durations. Quote durations from `get_composition`, not requested values.
 
 ## Worked example
 
-User has `@Maria` (character) and `@Fresco Bag` (reference object) in the library and asked for a short café ad.
+User has library character `@Maria`, reference object `@Fresco Bag`, and wants short café ad.
 
 ```
 Shot 1: Visual: @Maria steams milk behind a sunlit café counter, @Fresco Bag on the
@@ -49,4 +49,4 @@ Narration: "Fresco Coffee — small batches, roasted weekly."
 Quick cuts on shots 1–3, let shot 4 linger.
 ```
 
-Why it works: every shot re-names its subjects and stands alone; both entities appear by exact `@Name` in every shot that shows them; spoken lines are quoted and lead their Animation; silent shots still have real motion; no on-screen text or style words; narration is interleaved, not duplicated from dialogue; pacing is in words.
+Why it works: each shot re-names subjects and stands alone; exact `@Name`s mark every entity appearance; quoted speech leads Animation; silent shots still move; no on-screen text or style words; narration is interleaved, not duplicated; pacing uses words.
