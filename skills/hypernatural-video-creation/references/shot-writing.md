@@ -2,7 +2,7 @@
 
 Prompt feeds planner. Each `Shot N: …` entry becomes exactly one shot; planner preserves count, order, and intent while adding generation detail. Give every shot a **Visual** (still frame) and **Animation** (movement).
 
-**These rules govern shot lists you draft.** For user-supplied shot lists, preserve wording. Weave in required `@Name`s as binding edits; do NOT restructure into Visual/Animation form or expand. Planner does that.
+**These rules govern shot lists you draft.** For user-supplied lists, preserve wording — weaving in `@Name`s is the only edit that skips approval.
 
 ## Visual — becomes a still image
 
