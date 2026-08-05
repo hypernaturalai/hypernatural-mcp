@@ -24,12 +24,9 @@ Hypernatural (https://hypernatural.ai) turns prompts, scripts, and reference med
 
 ## When things fail
 
-- A tool error starting "Invalid arguments" — fix the named field and retry once.
-- `create_composition` rejects an `@Name` — the entity is misspelled or its creation job hasn't completed: check the `list_*` tools, create/poll what's missing, retry.
+- Error messages and failed-job payloads carry their own recovery instructions — read the error text and any `guidance` field and follow them before improvising.
 - `create_composition` fails ambiguously (timeout, server error) — call `list_compositions` **before** retrying; the composition may exist, and a blind retry creates a duplicate.
-- A job's `error_message` mentions blocked or moderated content — don't resubmit verbatim; adjust the flagged content with the user, then retry once.
-- Per-file failures in a `complete` job (`result.errors`) — re-upload that file via a fresh `get_image_upload_urls` and recreate; the missing entity never appears on its own.
-- `report_failure` — relay the guidance with the composition `url` and stop. Never loop retries on the same failure; the user can continue in the app.
+- Never loop retries on the same failure. On `report_failure`, relay the guidance with the composition `url` and stop; the user can continue in the app.
 
 ## Common mistakes
 
