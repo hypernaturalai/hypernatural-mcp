@@ -23,32 +23,33 @@ Decide and create the references first (SKILL.md steps 1–2), then write the li
 ## Structure
 
 - Interleave quoted narration between shots where the voiceover should land. Never repeat on-screen dialogue as voiceover.
-- Ask for pacing in words ("quick cuts on shots 1–3, let shot 4 linger"), not per-shot seconds — narration refits durations anyway.
+- **Give every shot an explicit duration label** — `Shot 2 (3s):` — never shorter than 3 seconds.
+- Size each to its content: 3s for a quick cut, longer where dialogue or action needs room.
+- Preserve explicit user timing (`(5s)` labels, timecodes, or qualitative timing words) when given.
+- After creation, ask for pacing changes in words ("quick cuts on shots 1–3, let shot 4 linger") because narration can refit durations.
 
 ## Worked example
 
 User has library character `@Maria`, reference object `@Fresco Bag`, and wants a short café ad.
 
 ```
-Shot 1: Visual: @Maria steams milk behind a sunlit café counter, @Fresco Bag on the
+Shot 1 (4s): Visual: @Maria steams milk behind a sunlit café counter, @Fresco Bag on the
 shelf beside the espresso machine. Animation: "This is how mornings should start,"
 she says, swirling the milk pitcher.
 
 Narration: "Small-batch. Roasted this week."
 
-Shot 2: Visual: A white ceramic cup with tulip latte art on a wooden counter,
+Shot 2 (3s): Visual: A white ceramic cup with tulip latte art on a wooden counter,
 @Fresco Bag standing behind it. Animation: Steam curls slowly off the cup.
 
-Shot 3: Visual: @Maria hands a to-go cup across the counter to a customer in a
+Shot 3 (5s): Visual: @Maria hands a to-go cup across the counter to a customer in a
 denim jacket. Animation: "See you tomorrow," she says with a nod as the customer
 turns to leave.
 
-Shot 4: Visual: @Fresco Bag centered on a rustic wooden shelf between two potted
+Shot 4 (5s): Visual: @Fresco Bag centered on a rustic wooden shelf between two potted
 coffee plants. Animation: The camera pushes in slowly toward the bag.
 
 Narration: "Fresco Coffee — small batches, roasted weekly."
-
-Quick cuts on shots 1–3, let shot 4 linger.
 ```
 
-Why it works: each shot re-names its subjects and stands alone; exact `@Name`s mark every entity appearance; quoted speech leads the Animation; silent shots still move; there are no style words; narration is interleaved, not duplicated; pacing uses words.
+Why it works: each shot re-names its subjects and stands alone; exact `@Name`s mark every entity appearance; quoted speech leads the Animation; silent shots still move; there are no style words; narration is interleaved, not duplicated; every shot carries an explicit duration sized to its content.
