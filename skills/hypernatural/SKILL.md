@@ -1,5 +1,5 @@
 ---
-name: hypernatural-video-creation
+name: hypernatural
 description: Use when the user wants a video made or edited — "make me a video", a promo, ad, UGC clip, explainer, product or launch video, turning a script, blog post, or images into video — even when no tool is named, and whenever Hypernatural or its MCP server is mentioned.
 ---
 

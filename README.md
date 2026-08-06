@@ -8,10 +8,10 @@ This repository is also an installable OpenAI plugin that bundles the Hypernatur
 
 | Skill | Description |
 |---|---|
-| [`hypernatural-video-creation`](skills/hypernatural-video-creation/SKILL.md) | Create or edit a video from a prompt, script, product, or images using the Hypernatural MCP server. |
+| [`hypernatural`](skills/hypernatural/SKILL.md) | Create or edit a video from a prompt, script, product, or images using the Hypernatural MCP server. |
 
 ## Layout
 
 Each skill lives at `skills/<name>/SKILL.md` with `name` and `description` frontmatter. OpenAI-specific presentation and MCP dependency metadata lives beside it in `agents/openai.yaml`.
 
-`skills/` is auto-synced from `hypernatural/mcp_skills/` in the [app repo](https://github.com/hypernaturalai/hypernatural) — edit it there, not here. Only `agents/` is owned by this repo.
+`skills/` — including each skill's `agents/openai.yaml` — is auto-synced from `hypernatural/mcp_skills/` in the [app repo](https://github.com/hypernaturalai/hypernatural); edit it there, not here.
