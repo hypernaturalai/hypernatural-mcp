@@ -14,4 +14,4 @@ This repository is also an installable OpenAI plugin that bundles the Hypernatur
 
 Each skill lives at `skills/<name>/SKILL.md` with `name` and `description` frontmatter. OpenAI-specific presentation and MCP dependency metadata lives beside it in `agents/openai.yaml`.
 
-The source of truth for `skills/` is `hypernatural/mcp_skills/` in the [hypernaturalai/hypernatural](https://github.com/hypernaturalai/hypernatural) repo — a GitHub Action there syncs changes into this repo on every merge to main. Don't edit `skills/` here (except `agents/`, which lives only in this repo); changes get overwritten by the next sync.
+`skills/` is auto-synced from `hypernatural/mcp_skills/` in the [app repo](https://github.com/hypernaturalai/hypernatural) — edit it there, not here. Only `agents/` is owned by this repo.
