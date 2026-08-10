@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.hypernatural/hypernatural",
+  "title": "Hypernatural",
+  "description": "Create and edit AI videos from chat: plan shots, generate scenes, and export stories and ads.",
+  "version": "1.0.0",
+  "websiteUrl": "https://hypernatural.ai",
+  "repository": {
+    "url": "https://github.com/hypernaturalai/hypernatural-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://hypernatural.ai/mcp"
+    }
+  ]
+}
