@@ -3,7 +3,7 @@
   "name": "ai.hypernatural/hypernatural",
   "title": "Hypernatural",
   "description": "Create and edit AI videos from chat: plan shots, generate scenes, and export stories and ads.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://hypernatural.ai",
   "repository": {
     "url": "https://github.com/hypernaturalai/hypernatural-mcp",
@@ -12,7 +12,7 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://hypernatural.ai/mcp"
+      "url": "https://api.hypernatural.ai/mcp"
     }
   ]
 }
