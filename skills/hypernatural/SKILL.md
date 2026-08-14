@@ -45,7 +45,7 @@ Every creative call is asynchronous — it queues background work and returns im
 
 | Purpose                 | Tools                                                         |
 | ----------------------- | ------------------------------------------------------------- |
-| Upload images           | `get_image_upload_urls`                                       |
+| Get images in           | `get_image_upload_urls`, `upload_file_from_remote_url`         |
 | Build the library       | `create_asset`, `create_reference_object`, `create_character` |
 | Read the library        | `list_assets`, `list_characters`, `list_reference_objects`    |
 | Create and read a video | `create_composition`, `get_composition`, `list_compositions`  |
@@ -60,7 +60,17 @@ Each tool's own description defines its arguments; this skill defines the workfl
 
 Before writing any shot text, decide which characters, products, logos, and scene images the video needs — and **ask the user**. The video should show _their_ spokesperson, product, and business; do not invent a stand-in for something the user owns.
 
-References are team-scoped and reusable across compositions, so check the library first (`list_characters`, `list_reference_objects`, `list_assets`) and reuse existing entities rather than creating duplicates. For new images, call `get_image_upload_urls([filenames])` and PUT each file's bytes to its url — only the files you were given, never a whole directory.
+References are team-scoped and reusable across compositions, so check the library first (`list_characters`, `list_reference_objects`, `list_assets`) and reuse existing entities rather than creating duplicates.
+
+Every new image needs an `upload_key` first. Pick the path by **where the bytes already are**:
+
+| Bytes are                        | Call                                                                       |
+| -------------------------------- | -------------------------------------------------------------------------- |
+| On local disk, and you can `PUT` | `get_image_upload_urls([filenames])`, then PUT each file's bytes to its url |
+| A native attachment (`file`, ChatGPT only) | `upload_file_from_remote_url(file=…)`                           |
+| Already at a public HTTPS URL    | `upload_file_from_remote_url(url=…)` — never download it locally first     |
+
+Upload only the files you were given, never a whole directory. `upload_file_from_remote_url` takes exactly one source — whichever of `file` / `url` your client's schema offers — and returns its `upload_key` immediately, with no job to poll. If a PUT fails, switch to `upload_file_from_remote_url` instead of retrying it. Never invent a `url` for a local file — when neither path is available, say so and ask the user for a public URL or an attachment, rather than building the video without an image they asked for.
 
 ### 2. Create a reference for each image, routed by what it depicts
 
@@ -115,6 +125,7 @@ Finish by giving the user the composition's `url` — review, rendering, and exp
 | Writing "your logo", "the same barista", or "she" in a shot | The exact `@Name`, in every shot, every appearance                                            |
 | A `static_image_references` name that is not in `prompt`    | Every name there must appear as `@Name` in the prompt, or the call is rejected                |
 | Uploading a product photo as a plain asset                  | Products and logos are reference objects, people are characters, scenes and styles are assets |
+| Downloading a remote image locally to re-upload it          | `upload_file_from_remote_url(url=…)` — the server fetches it for you                           |
 | Answering a `next_action` question yourself                 | Forward the user's own answer                                                                 |
 | Messaging while `next_action` is `wait`                     | Wait `retry_after_seconds`, then poll again                                                   |
 | A second `create_composition` to change something           | One composition per video; every later change is `send_chat_message`                          |
