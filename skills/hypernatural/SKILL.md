@@ -56,9 +56,9 @@ Each tool's own description defines its arguments; this skill defines the workfl
 
 ## Building a video
 
-### 1. Decide the references first, and ask the user about them
+### 1. Decide the references, and ask about them with your draft
 
-Before writing any shot text, decide which characters, products, logos, and scene images the video needs — and **ask the user**. The video should show _their_ spokesperson, product, and business; do not invent a stand-in for something the user owns.
+Decide which characters, products, logos, and scene images the video needs. The video should show _their_ spokesperson, product, and business — do not invent a stand-in for something the user owns — so ask the user about the references you need. But ask **in the same reply as your drafted shot list** (step 4): a reference question rides along with the draft, it never replaces or postpones it. Never answer a video request with only a list of questions.
 
 References are team-scoped and reusable across compositions, so check the library first (`list_characters`, `list_reference_objects`, `list_assets`) and reuse existing entities rather than creating duplicates.
 
