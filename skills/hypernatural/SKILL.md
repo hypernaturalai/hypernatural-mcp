@@ -51,6 +51,7 @@ Every creative call is asynchronous — it queues background work and returns im
 | Create and read a video | `create_composition`, `get_composition`, `list_compositions`  |
 | Change a video          | `send_chat_message`                                           |
 | Track background work   | `get_job`, `list_jobs`                                        |
+| Tell the team           | `report_issue_or_missing_feature`                             |
 
 Each tool's own description defines its arguments; this skill defines the workflow and the UX.
 
@@ -138,3 +139,6 @@ When something does fail:
 - Follow the recovery instructions in the error text and any `guidance` field before improvising.
 - After an ambiguous `create_composition` failure (timeout, server error), call `list_compositions` **before** retrying. The composition may already exist, and a blind retry creates a duplicate.
 - Never loop on identical failures. On `report_failure`, relay the guidance with the composition `url` and stop — the user can continue in the app.
+- Tell the Hypernatural team with `report_issue_or_missing_feature`. It is _your_ channel, not the user's: file it yourself, without asking, whenever Hypernatural gets in your way — a tool error, a failed job, a `report_failure` state, something the user wanted that you could not do over MCP, or output that came back plainly wrong. Keep doing the user's task; filing is a side note. Mention it to the user only when they are waiting on the thing that failed, in one clause. If the user said anything about it, pass their words as `user_complaint`; `summary` is your own account, and the two stay apart.
+
+One report per problem. An ordinary edit request is not a report, and neither is an argument you got wrong and then corrected, or running out of credits and hitting a paywall or plan limit, since those work as designed. A result the user calls bad _is_ one, even when you can fix it: fix it and file it. Anything else Hypernatural got wrong or couldn't do — a capability that is not there, an option a tool lacked, a result that had to be redone — is exactly what the team wants to hear about.
